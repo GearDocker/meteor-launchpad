@@ -19,8 +19,8 @@ COPY scripts $BUILD_SCRIPTS_DIR
 RUN chmod -R 750 $BUILD_SCRIPTS_DIR
 
 # install all dependencies, build app, clean up
-RUN mkdir -p $APP_SOURCE_DIR && \
-    cd $APP_SOURCE_DIR && \
+RUN mkdir -p $APP_SOURCE_DIR
+RUN cd $APP_SOURCE_DIR && \
     $BUILD_SCRIPTS_DIR/install-meteor.sh
 
 # We call the "meteor" command for the first time which will install the Meteor binaries in ~/.meteor.
