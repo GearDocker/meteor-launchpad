@@ -1,4 +1,4 @@
-FROM phusion/passenger-nodejs
+FROM debian:jessie
 MAINTAINER Gary Leong <gwleong@gmail.com>
 
 ###########################
