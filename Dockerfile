@@ -74,7 +74,12 @@ ENV PORT 3000
 
 EXPOSE 3000
 
-#WORKDIR $APP_BUNDLE_DIR/bundle
 # start the app
+WORKDIR $APP_BUNDLE_DIR/bundle
+CMD ["passenger", "start", "--app-type", "node", "--startup-file", "main.js"]
+
+#WORKDIR $APP_BUNDLE_DIR/bundle
 #ENTRYPOINT ["./entrypoint.sh"]
 #CMD ["node", "main.js"]
+#CMD passenger start --app-type node --startup-file main.js --port 8090
+
