@@ -74,6 +74,9 @@ ONBUILD RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/install-meteor.sh
 
 ONBUILD RUN cd $APP_SOURCE_DIR && \
+  $BUILD_SCRIPTS_DIR/install-passenger.sh
+
+ONBUILD RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/build-meteor.sh
 
 ## install all dependencies, build app, clean up
@@ -85,9 +88,6 @@ ONBUILD RUN cd $APP_SOURCE_DIR && \
 #  $BUILD_SCRIPTS_DIR/install-meteor.sh && \
 #  $BUILD_SCRIPTS_DIR/build-meteor.sh && \
 #  $BUILD_SCRIPTS_DIR/post-build-cleanup.sh
-
-ONBUILD RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/install-passenger.sh
 
 #  $BUILD_SCRIPTS_DIR/install-mongo.sh && \
 
