@@ -43,26 +43,23 @@ ENV TOOL_NODE_FLAGS $TOOL_NODE_FLAGS
 RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/install-deps.sh
 
-#RUN cd $APP_SOURCE_DIR && \
-#  $BUILD_SCRIPTS_DIR/install-node.sh
-#
-#RUN cd $APP_SOURCE_DIR && \
-#  $BUILD_SCRIPTS_DIR/install-phantom.sh 
-#
-#RUN cd $APP_SOURCE_DIR && \
-#  $BUILD_SCRIPTS_DIR/install-graphicsmagick.sh 
-#
-#RUN cd $APP_SOURCE_DIR && \
-#  $BUILD_SCRIPTS_DIR/install-graphicsmagick.sh
-#
-#RUN cd $APP_SOURCE_DIR && \
-#  $BUILD_SCRIPTS_DIR/install-meteor.sh
-#
-#RUN cd $APP_SOURCE_DIR && \
-#  $BUILD_SCRIPTS_DIR/install-passenger.sh
-#
-#ONBUILD COPY . $APP_SOURCE_DIR
-#  $BUILD_SCRIPTS_DIR/install-deps.sh
+RUN cd $APP_SOURCE_DIR && \
+  $BUILD_SCRIPTS_DIR/install-node.sh
+
+RUN cd $APP_SOURCE_DIR && \
+  $BUILD_SCRIPTS_DIR/install-phantom.sh 
+
+RUN cd $APP_SOURCE_DIR && \
+  $BUILD_SCRIPTS_DIR/install-graphicsmagick.sh 
+
+RUN cd $APP_SOURCE_DIR && \
+  $BUILD_SCRIPTS_DIR/install-graphicsmagick.sh
+
+RUN cd $APP_SOURCE_DIR && \
+  $BUILD_SCRIPTS_DIR/install-meteor.sh
+
+RUN cd $APP_SOURCE_DIR && \
+  $BUILD_SCRIPTS_DIR/install-passenger.sh
 #
 #ONBUILD RUN cd $APP_SOURCE_DIR && \
 #  $BUILD_SCRIPTS_DIR/build-meteor.sh
