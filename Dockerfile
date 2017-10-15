@@ -79,25 +79,6 @@ ONBUILD COPY . $APP_SOURCE_DIR
 ONBUILD RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/build-meteor.sh
 
-## install all dependencies, build app, clean up
-#ONBUILD RUN cd $APP_SOURCE_DIR && \
-#  $BUILD_SCRIPTS_DIR/install-deps.sh && \
-#  $BUILD_SCRIPTS_DIR/install-node.sh && \
-#  $BUILD_SCRIPTS_DIR/install-phantom.sh && \
-#  $BUILD_SCRIPTS_DIR/install-graphicsmagick.sh && \
-#  $BUILD_SCRIPTS_DIR/install-meteor.sh && \
-#  $BUILD_SCRIPTS_DIR/build-meteor.sh && \
-#  $BUILD_SCRIPTS_DIR/post-build-cleanup.sh
-
-#  $BUILD_SCRIPTS_DIR/install-mongo.sh && \
-
-# Default values for Meteor environment variables
-ENV ROOT_URL http://localhost
-ENV MONGO_URL mongodb://127.0.0.1:27017/meteor
-ENV PORT 3000
-
-EXPOSE 3000
-
 # start the app
 WORKDIR $APP_BUNDLE_DIR/bundle
 CMD ["passenger", "start", "--app-type", "node", "--startup-file", "main.js"]
