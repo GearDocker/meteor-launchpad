@@ -6,11 +6,6 @@ RUN groupadd -r node && useradd -m -g node node
 # Gosu
 ENV GOSU_VERSION 1.10
 
-# MongoDB
-ENV MONGO_VERSION 3.4.9
-ENV MONGO_MAJOR 3.4
-ENV MONGO_PACKAGE mongodb-org
-
 # PhantomJS
 ENV PHANTOM_VERSION 2.1.1
 
@@ -23,10 +18,6 @@ ENV BUILD_SCRIPTS_DIR /opt/build_scripts
 COPY scripts $BUILD_SCRIPTS_DIR
 RUN chmod -R 750 $BUILD_SCRIPTS_DIR
 
-# Define all --build-arg options
-ARG APT_GET_INSTALL
-ENV APT_GET_INSTALL $APT_GET_INSTALL
-
 ARG INSTALL_PASSENGER
 ENV INSTALL_PASSENGER ${INSTALL_PASSENGER:-true}
 
@@ -35,9 +26,6 @@ ENV NODE_VERSION ${NODE_VERSION:-4.8.4}
 
 ARG NPM_TOKEN
 ENV NPM_TOKEN $NPM_TOKEN
-
-ARG INSTALL_MONGO
-ENV INSTALL_MONGO $INSTALL_MONGO
 
 ARG INSTALL_PHANTOMJS
 ENV INSTALL_PHANTOMJS $INSTALL_PHANTOMJS
@@ -86,5 +74,3 @@ CMD ["passenger", "start", "--app-type", "node", "--startup-file", "main.js"]
 #WORKDIR $APP_BUNDLE_DIR/bundle
 #ENTRYPOINT ["./entrypoint.sh"]
 #CMD ["node", "main.js"]
-#CMD passenger start --app-type node --startup-file main.js --port 8090
-
