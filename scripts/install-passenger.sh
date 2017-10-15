@@ -2,13 +2,21 @@
 
 set -e
 
-apt-get install -y dirmngr gnupg
-apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7
-apt-get install -y apt-transport-https ca-certificates
+if [ -f $APP_SOURCE_DIR/launchpad.conf ]; then
+  source <(grep INSTALL_PASSENGER $APP_SOURCE_DIR/launchpad.conf)
+fi
 
-# Add our APT repository
-sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger jessie main > /etc/apt/sources.list.d/passenger.list'
-apt-get update
+if [ "$INSTALL_PASSENGER" = true ]; then
+  printf "\n[-] Installing phusion passenger ...\n\n"
 
-# Install Passenger + Nginx
-apt-get install -y nginx-extras passenger
+  apt-get install -y dirmngr gnupg
+  apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7
+  apt-get install -y apt-transport-https ca-certificates
+    
+  # Add our APT repository
+  sh -c 'echo deb https://oss-binaries.phusionpassenger.com/apt/passenger jessie main > /etc/apt/sources.list.d/passenger.list'
+  apt-get update
+    
+  # Install Passenger + Nginx
+  apt-get install -y nginx-extras passenger
+fi
