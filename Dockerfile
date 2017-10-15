@@ -37,9 +37,6 @@ ENV INSTALL_GRAPHICSMAGICK $INSTALL_GRAPHICSMAGICK
 ARG TOOL_NODE_FLAGS
 ENV TOOL_NODE_FLAGS $TOOL_NODE_FLAGS
 
-# optionally custom apt dependencies at app build time
-RUN if [ "$APT_GET_INSTALL" ]; then apt-get update && apt-get install -y $APT_GET_INSTALL; fi
-
 RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/install-deps.sh
 
