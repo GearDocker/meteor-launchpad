@@ -31,6 +31,17 @@ printf "\n[-] Running npm install in the server bundle...\n\n"
 cd $APP_BUNDLE_DIR/bundle/programs/server/
 meteor npm install --production
 
+#Create public and tmp directory 
+#needed for container runners like passenger
+cd $APP_BUNDLE_DIR
+
+for DIRECTORY in public tmp
+do
+  if [ ! -d "$DIRECTORY" ]; then
+        mkdir $DIRECTORY
+  fi
+done
+
 # put the entrypoint script in WORKDIR
 mv $BUILD_SCRIPTS_DIR/entrypoint.sh $APP_BUNDLE_DIR/bundle/entrypoint.sh
 
