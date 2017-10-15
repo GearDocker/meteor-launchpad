@@ -56,10 +56,11 @@ RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/install-graphicsmagick.sh
 
 RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/install-meteor.sh
+  $BUILD_SCRIPTS_DIR/install-passenger.sh
 
 RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/install-passenger.sh
+  $BUILD_SCRIPTS_DIR/install-meteor.sh
+
 #
 #ONBUILD RUN cd $APP_SOURCE_DIR && \
 #  $BUILD_SCRIPTS_DIR/build-meteor.sh
