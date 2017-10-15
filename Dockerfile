@@ -40,34 +40,34 @@ ENV TOOL_NODE_FLAGS $TOOL_NODE_FLAGS
 RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/install-deps.sh
 
-RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/install-node.sh
-
-RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/install-phantom.sh 
-
-RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/install-graphicsmagick.sh 
-
-RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/install-graphicsmagick.sh
-
-RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/install-meteor.sh
-
-RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/install-passenger.sh
-
-ONBUILD COPY . $APP_SOURCE_DIR
-  $BUILD_SCRIPTS_DIR/install-deps.sh
-
-ONBUILD RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/build-meteor.sh
-
-# start the app
-WORKDIR $APP_BUNDLE_DIR/bundle
-CMD ["passenger", "start", "--app-type", "node", "--startup-file", "main.js"]
-
+#RUN cd $APP_SOURCE_DIR && \
+#  $BUILD_SCRIPTS_DIR/install-node.sh
+#
+#RUN cd $APP_SOURCE_DIR && \
+#  $BUILD_SCRIPTS_DIR/install-phantom.sh 
+#
+#RUN cd $APP_SOURCE_DIR && \
+#  $BUILD_SCRIPTS_DIR/install-graphicsmagick.sh 
+#
+#RUN cd $APP_SOURCE_DIR && \
+#  $BUILD_SCRIPTS_DIR/install-graphicsmagick.sh
+#
+#RUN cd $APP_SOURCE_DIR && \
+#  $BUILD_SCRIPTS_DIR/install-meteor.sh
+#
+#RUN cd $APP_SOURCE_DIR && \
+#  $BUILD_SCRIPTS_DIR/install-passenger.sh
+#
+#ONBUILD COPY . $APP_SOURCE_DIR
+#  $BUILD_SCRIPTS_DIR/install-deps.sh
+#
+#ONBUILD RUN cd $APP_SOURCE_DIR && \
+#  $BUILD_SCRIPTS_DIR/build-meteor.sh
+#
+## start the app
 #WORKDIR $APP_BUNDLE_DIR/bundle
-#ENTRYPOINT ["./entrypoint.sh"]
-#CMD ["node", "main.js"]
+#CMD ["passenger", "start", "--app-type", "node", "--startup-file", "main.js"]
+#
+##WORKDIR $APP_BUNDLE_DIR/bundle
+##ENTRYPOINT ["./entrypoint.sh"]
+##CMD ["node", "main.js"]
