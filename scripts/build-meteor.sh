@@ -18,32 +18,33 @@ export METEOR_ALLOW_SUPERUSER=true
 cd $APP_SOURCE_DIR
 
 # Install app deps
-printf "\n[-] Running npm install in app directory...\n\n"
+printf "\n[-] Running npm install in app directory at $APP_BUNDLE_DIR ...\n\n"
 meteor npm install
 
 # build the bundle
-printf "\n[-] Building Meteor application...\n\n"
+printf "\n[-] Building Meteor application at $APP_BUNDLE_DIR ...\n\n"
 mkdir -p $APP_BUNDLE_DIR
-meteor build --directory $APP_BUNDLE_DIR --server-only --allow-superuser
-
-# run npm install in bundle
-printf "\n[-] Running npm install in the server bundle...\n\n"
-cd $APP_BUNDLE_DIR/bundle/programs/server/
-meteor npm install --production
-
-#Create public and tmp directory 
-#needed for container runners like passenger
-cd $APP_BUNDLE_DIR
-
-for DIRECTORY in public tmp
-do
-  if [ ! -d "$DIRECTORY" ]; then
-        mkdir $DIRECTORY
-  fi
-done
-
-# put the entrypoint script in WORKDIR
-mv $BUILD_SCRIPTS_DIR/entrypoint.sh $APP_BUNDLE_DIR/bundle/entrypoint.sh
-
-# change ownership of the app to the node user
-chown -R node:node $APP_BUNDLE_DIR
+#meteor build --directory $APP_BUNDLE_DIR --server-only --allow-superuser
+#
+## run npm install in bundle
+#printf "\n[-] Running npm install in the server bundle at $APP_BUNDLE_DIR/bundle/programs/server/ ...\n\n"
+#cd $APP_BUNDLE_DIR/bundle/programs/server/
+#meteor npm install --production
+#
+##Create public and tmp directory 
+##needed for container runners like passenger
+#cd $APP_BUNDLE_DIR
+#
+#for DIRECTORY in public tmp
+#do
+#  if [ ! -d "$DIRECTORY" ]; then
+#        printf "\n[-] Making directory $APP_BUNDLE_DIR/$DIRECTORY ...\n\n"
+#        mkdir $DIRECTORY
+#  fi
+#done
+#
+## put the entrypoint script in WORKDIR
+#mv $BUILD_SCRIPTS_DIR/entrypoint.sh $APP_BUNDLE_DIR/bundle/entrypoint.sh
+#
+## change ownership of the app to the node user
+#chown -R node:node $APP_BUNDLE_DIR
