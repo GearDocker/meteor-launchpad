@@ -72,3 +72,4 @@ ONBUILD RUN cd $APP_SOURCE_DIR && \
 ##WORKDIR $APP_BUNDLE_DIR/bundle
 ##ENTRYPOINT ["./entrypoint.sh"]
 ##CMD ["node", "main.js"]
+#CMD passenger start --app-type node --startup-file main.js --port 8090
