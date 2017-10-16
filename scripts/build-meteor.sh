@@ -33,15 +33,17 @@ meteor npm install --production
 
 #Create public and tmp directory 
 #needed for container runners like passenger
-cd $APP_BUNDLE_DIR
+cd $APP_BUNDLE_DIR/bundle
 
 for DIRECTORY in public tmp
 do
   if [ ! -d "$DIRECTORY" ]; then
-        printf "\n[-] Making directory $APP_BUNDLE_DIR/$DIRECTORY ...\n\n"
+        printf "\n[-] Making directory $APP_BUNDLE_DIR/$DIRECTORY/bundle ...\n\n"
         mkdir $DIRECTORY
   fi
 done
+
+cd -
 
 # put the entrypoint script in WORKDIR
 mv $BUILD_SCRIPTS_DIR/entrypoint.sh $APP_BUNDLE_DIR/bundle/entrypoint.sh
