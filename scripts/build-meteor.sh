@@ -23,6 +23,9 @@ VERSION=`meteor --version --allow-superuser`
 echo "Meteror version is $VERSION"
 sleep 4
 
+printf "\n[-] Resetting meteor ...\n\n"
+meteor reset --allow-superuser
+
 # Install app deps
 printf "\n[-] Running npm install --allow-superuser in app directory at $APP_BUNDLE_DIR ...\n\n"
 meteor npm install --allow-superuser
