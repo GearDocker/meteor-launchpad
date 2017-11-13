@@ -19,7 +19,8 @@ cd $APP_SOURCE_DIR
 
 # Install app deps
 printf "\n[-] Show the meteror version number ...\n\n"
-meteor --version --allow-superuser
+VERSION=`meteor --version --allow-superuser`
+echo "Meteror version is $VERSION"
 sleep 4
 
 # Install app deps
