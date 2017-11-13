@@ -18,6 +18,11 @@ export METEOR_ALLOW_SUPERUSER=true
 cd $APP_SOURCE_DIR
 
 # Install app deps
+printf "\n[-] Show the meteror version number ...\n\n"
+meteor --version --allow-superuser
+sleep 4
+
+# Install app deps
 printf "\n[-] Running npm install --allow-superuser in app directory at $APP_BUNDLE_DIR ...\n\n"
 meteor npm install --allow-superuser
 
