@@ -19,7 +19,7 @@ cd $APP_SOURCE_DIR
 
 # Install app deps
 printf "\n[-] Running npm install in app directory at $APP_BUNDLE_DIR ...\n\n"
-meteor npm install
+meteor npm install --allow-superuser
 
 # build the bundle
 printf "\n[-] Building Meteor application at $APP_BUNDLE_DIR ...\n\n"
@@ -29,7 +29,7 @@ meteor build --directory $APP_BUNDLE_DIR --server-only --allow-superuser
 # run npm install in bundle
 printf "\n[-] Running npm install in the server bundle at $APP_BUNDLE_DIR/bundle/programs/server/ ...\n\n"
 cd $APP_BUNDLE_DIR/bundle/programs/server/
-meteor npm install --production
+meteor npm install --production --allow-superuser
 
 #Create public and tmp directory 
 #needed for container runners like passenger
