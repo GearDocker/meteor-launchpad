@@ -59,7 +59,10 @@ RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/install-passenger.sh
 
 RUN cd $APP_SOURCE_DIR && \
-  curl "https://install.meteor.com/?release=1.4.4.4" | sh
+  curl "https://install.meteor.com/?release=1.4.2.3" | sh
+
+#RUN cd $APP_SOURCE_DIR && \
+#  curl "https://install.meteor.com/?release=1.4.4.4" | sh
 
 ONBUILD COPY . $APP_SOURCE_DIR
 ONBUILD RUN cd $APP_SOURCE_DIR && \
