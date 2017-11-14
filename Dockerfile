@@ -62,7 +62,7 @@ RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/install-passenger.sh
 
 RUN cd $APP_SOURCE_DIR && \
-  curl "https://install.meteor.com/?release=1.5" | sh
+  curl "https://install.meteor.com/?release=1.5.2" | sh
 
 RUN apt-get update && apt-get install p7zip-full -y
 #RUN apt-get update && apt-get install p7zip-full p7zip-rar -y
