@@ -16,9 +16,7 @@ fi
 export METEOR_ALLOW_SUPERUSER=true
 
 cd $APP_SOURCE_DIR
-
-printf "\n[-] Resetting meteor ...\n\n"
-meteor reset --allow-superuser
+printf "\n[-] meteor reset --allow-superuser ...\n\n"
 
 # Install app deps
 VERSION=`meteor --version --allow-superuser`
@@ -29,7 +27,7 @@ printf "\n[-] Running npm install --allow-superuser in app directory at $APP_BUN
 meteor npm install --allow-superuser
 
 # build the bundle
-printf "\n[-] Building Meteor application as --allow-superuser at $APP_BUNDLE_DIR ...\n\n"
+printf "\n[-] meteor build --directory $APP_BUNDLE_DIR --server-only --allow-superuser @$APP_BUNDLE_DIR ...\n\n"
 mkdir -p $APP_BUNDLE_DIR
 meteor build --directory $APP_BUNDLE_DIR --server-only --allow-superuser
 
