@@ -50,8 +50,10 @@ done
 
 cd -
 
+printf "\n[-] Adding entry point ...\n\n"
 # put the entrypoint script in WORKDIR
 mv $BUILD_SCRIPTS_DIR/entrypoint.sh $APP_BUNDLE_DIR/bundle/entrypoint.sh
 
+printf "\n[-] Chowning ownership to node ...\n\n"
 # change ownership of the app to the node user
 chown -R node:node $APP_BUNDLE_DIR
