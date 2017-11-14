@@ -9,6 +9,9 @@ ENV GOSU_VERSION 1.10
 # PhantomJS
 ENV PHANTOM_VERSION 2.1.1
 
+COPY tar_1.29b-2_amd64.deb /var/tmp/tar_1.29b-2_amd64.deb
+RUN dpkg -i /var/tmp/tar_1.29b-2_amd64.deb
+
 # build directories
 ENV APP_SOURCE_DIR /opt/meteor/src
 ENV APP_BUNDLE_DIR /opt/meteor/dist
