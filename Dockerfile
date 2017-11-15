@@ -64,7 +64,7 @@ RUN cd $APP_SOURCE_DIR && \
 RUN cd $APP_SOURCE_DIR && \
   curl "https://install.meteor.com/?release=1.5.2" | sh
 
-RUN apt-get update && apt-get install p7zip-full -y
+RUN apt-get update && apt-get install p7zip-full bc -y
 #RUN apt-get update && apt-get install p7zip-full p7zip-rar -y
 
 #RUN cd $APP_SOURCE_DIR && \
