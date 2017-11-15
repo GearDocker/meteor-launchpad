@@ -77,16 +77,16 @@ RUN apt-get update && apt-get install p7zip-full bc -y
 #    echo $TOOL_NODE_FLAGS"
 
 ONBUILD COPY . $APP_SOURCE_DIR
-#ONBUILD ENV TOOL_NODE_FLAGS "--max-old-space-size=4096"
-#ONBUILD RUN cd $APP_SOURCE_DIR && \
-#  $BUILD_SCRIPTS_DIR/build-meteor.sh
+ONBUILD ENV TOOL_NODE_FLAGS "--max-old-space-size=3033"
+ONBUILD RUN cd $APP_SOURCE_DIR && \
+  $BUILD_SCRIPTS_DIR/build-meteor.sh
 
-RUN export TOTAL_MEMORY=`awk '/^(MemTotal)/{print $2}' /proc/meminfo` && \
-    export MEMORY_ALLOCATION=$(echo "$TOTAL_MEMORY*0.75"|bc) && \
-    export MEMORY_ALLOCATION=`echo $MEMORY_ALLOCATION | cut -c1-4` && \
-    export TOOL_NODE_FLAGS="--max-old-space-size=$MEMORY_ALLOCATION" && \
-    cd $APP_SOURCE_DIR && \
-    $BUILD_SCRIPTS_DIR/build-meteor.sh
+#RUN export TOTAL_MEMORY=`awk '/^(MemTotal)/{print $2}' /proc/meminfo` && \
+#    export MEMORY_ALLOCATION=$(echo "$TOTAL_MEMORY*0.75"|bc) && \
+#    export MEMORY_ALLOCATION=`echo $MEMORY_ALLOCATION | cut -c1-4` && \
+#    export TOOL_NODE_FLAGS="--max-old-space-size=$MEMORY_ALLOCATION" && \
+#    cd $APP_SOURCE_DIR && \
+#    $BUILD_SCRIPTS_DIR/build-meteor.sh
 
 ## start the app
 #WORKDIR $APP_BUNDLE_DIR/bundle
