@@ -43,9 +43,9 @@ RUN cd $APP_SOURCE_DIR && \
 #############################
 # Install Meteror as User Node
 #############################
-USER node
+#USER node
 RUN cd $APP_SOURCE_DIR && \
-  curl "https://install.meteor.com/?release=1.5.2" | sh
+  curl "https://install.meteor.com/?release=1.5" | sh
 #  curl "https://install.meteor.com/?release=1.4.4.4" | sh
 
 #########################################################
