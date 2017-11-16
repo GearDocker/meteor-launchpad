@@ -24,7 +24,7 @@ printf "\n[-] Meteror version is $VERSION \n\n"
 
 # Install app deps
 printf "\n[-] Running npm install in app directory at $APP_BUNDLE_DIR ...\n\n"
-meteor npm install 
+npm install 
 
 # build the bundle
 printf "\n[-] meteor build --directory $APP_BUNDLE_DIR --server-only @$APP_BUNDLE_DIR ...\n\n"
