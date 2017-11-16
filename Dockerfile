@@ -3,9 +3,6 @@ MAINTAINER Jeremy Shimko <jeremy.shimko@gmail.com>
 
 RUN groupadd -r node && useradd -m -g node node
 
-# Gosu
-#ENV GOSU_VERSION 1.10
-
 #COPY tar_1.29b-2_amd64.deb /var/tmp/tar_1.29b-2_amd64.deb
 #RUN dpkg -i /var/tmp/tar_1.29b-2_amd64.deb
 
@@ -20,15 +17,6 @@ RUN chmod -R 750 $BUILD_SCRIPTS_DIR && chown -R node:node $BUILD_SCRIPTS_DIR
 
 RUN mkdir -p $APP_SOURCE_DIR 
 RUN mkdir -p $APP_BUNDLE_DIR 
-
-ARG INSTALL_PASSENGER
-ENV INSTALL_PASSENGER ${INSTALL_PASSENGER:-true}
-
-ARG NODE_VERSION
-ENV NODE_VERSION ${NODE_VERSION:-4.8.4}
-
-ARG NPM_TOKEN
-ENV NPM_TOKEN $NPM_TOKEN
 
 # Node flags for the Meteor build tool
 ARG TOOL_NODE_FLAGS
@@ -51,6 +39,10 @@ ENV TOOL_NODE_FLAGS $TOOL_NODE_FLAGS
 ONBUILD COPY . $APP_SOURCE_DIR
 
 #ONBUILD USER node
+ARG NPM_TOKEN
+ARG NODE_VERSION
+ONBUILD ENV NPM_TOKEN $NPM_TOKEN
+ONBUILD ENV NODE_VERSION ${NODE_VERSION:-4.8.4}
 ONBUILD ENV TOOL_NODE_FLAGS "--max-old-space-size=3033"
 ONBUILD RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/install-deps.sh && \
