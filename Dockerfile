@@ -25,7 +25,7 @@ ARG INSTALL_PASSENGER
 ENV INSTALL_PASSENGER ${INSTALL_PASSENGER:-true}
 
 ARG NODE_VERSION
-ENV NODE_VERSION ${NODE_VERSION:-4.8.6}
+ENV NODE_VERSION ${NODE_VERSION:-4.8.4}
 
 ARG NPM_TOKEN
 ENV NPM_TOKEN $NPM_TOKEN
@@ -38,12 +38,16 @@ RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/install-deps.sh && \
   $BUILD_SCRIPTS_DIR/install-passenger.sh 
 
+RUN cd $APP_SOURCE_DIR && \
+  $BUILD_SCRIPTS_DIR/install-node.sh && \
+  curl "https://install.meteor.com/?release=1.5" | sh
+
 #########################################################
 # ONBUILD 
 #########################################################
-ONBUILD RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/install-node.sh && \
-  curl "https://install.meteor.com/?release=1.5" | sh
+#ONBUILD RUN cd $APP_SOURCE_DIR && \
+#  $BUILD_SCRIPTS_DIR/install-node.sh && \
+#  curl "https://install.meteor.com/?release=1.5" | sh
 #  curl "https://install.meteor.com/?release=1.4.4.4" | sh
 
 ONBUILD COPY . $APP_SOURCE_DIR
@@ -57,19 +61,6 @@ ONBUILD RUN cd $APP_SOURCE_DIR && \
 ONBUILD USER root
 ONBUILD RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/post-install-cleanup.sh
-
-#RUN /bin/bash -c "export TOTAL_MEMORY=`awk '/^(MemTotal)/{print $2}' /proc/meminfo` && \
-#    export MEMORY_ALLOCATION=$(echo \"$TOTAL_MEMORY*0.75\"|bc) && \
-#    export MEMORY_ALLOCATION=`echo $MEMORY_ALLOCATION | cut -c1-4` && \
-#    export TOOL_NODE_FLAGS=\"--max-old-space-size=$MEMORY_ALLOCATION\ && \" 
-#    echo $TOOL_NODE_FLAGS"
-
-#RUN export TOTAL_MEMORY=`awk '/^(MemTotal)/{print $2}' /proc/meminfo` && \
-#    export MEMORY_ALLOCATION=$(echo "$TOTAL_MEMORY*0.75"|bc) && \
-#    export MEMORY_ALLOCATION=`echo $MEMORY_ALLOCATION | cut -c1-4` && \
-#    export TOOL_NODE_FLAGS="--max-old-space-size=$MEMORY_ALLOCATION" && \
-#    cd $APP_SOURCE_DIR && \
-#    $BUILD_SCRIPTS_DIR/build-meteor.sh
 
 ## start the app
 #WORKDIR $APP_BUNDLE_DIR/bundle
