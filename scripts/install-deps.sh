@@ -8,7 +8,7 @@ printf "\n[-] Installing base OS dependencies...\n\n"
 
 apt-get update
 apt-get install -y apt-transport-https ca-certificates
-apt-get install -y --no-install-recommends curl bzip2 bsdtar build-essential python git wget
+apt-get install -y --no-install-recommends curl bzip2 bsdtar build-essential python git wget p7zip-full bc
 
 # install gosu
 
@@ -28,4 +28,4 @@ chmod +x /usr/local/bin/gosu
 
 gosu nobody true
 
-apt-get purge -y --auto-remove wget
+#apt-get purge -y --auto-remove wget
