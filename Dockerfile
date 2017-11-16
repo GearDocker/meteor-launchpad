@@ -35,13 +35,10 @@ ARG TOOL_NODE_FLAGS
 ENV TOOL_NODE_FLAGS $TOOL_NODE_FLAGS
 
 RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/install-deps.sh
-
-RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/install-node.sh
-
-RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/install-passenger.sh
+  $BUILD_SCRIPTS_DIR/install-deps.sh && \
+  $BUILD_SCRIPTS_DIR/install-node.sh && \
+  $BUILD_SCRIPTS_DIR/install-passenger.sh && \
+  $BUILD_SCRIPTS_DIR/post-install-cleanup.sh
 
 #############################
 # Install Meteror as User Node
