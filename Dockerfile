@@ -55,6 +55,7 @@ RUN chown -R node:node $APP_SOURCE_DIR && chown -R node:node $APP_BUNDLE_DIR
 #########################################################
 ONBUILD USER node
 ONBUILD COPY . $APP_SOURCE_DIR
+ONBUILD RUN chown -R node:node $APP_SOURCE_DIR && chown -R node:node $APP_BUNDLE_DIR
 ONBUILD ENV TOOL_NODE_FLAGS "--max-old-space-size=3033"
 ONBUILD RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/build-meteor.sh

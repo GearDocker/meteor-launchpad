@@ -10,7 +10,7 @@ run_it () {
 # ~/.meteor, replacing whatever is already there. (~/.meteor is only a cache of
 # packages and package metadata; no personal persistent data is stored there.)
 
-RELEASE="1.6"
+RELEASE="1.5"
 PLATFORM="os.linux.x86_64"
 PREFIX="/usr/local"
 
@@ -31,43 +31,46 @@ if [ -e "$HOME/.meteor" ]; then
   rm -rf "$HOME/.meteor"
 fi
 
-TARBALL_URL="https://static-meteor.netdna-ssl.com/packages-bootstrap/${RELEASE}/meteor-bootstrap-${PLATFORM}.tar.gz"
 INSTALL_TMPDIR="$HOME/.meteor-install-tmp"
 TARBALL_FILE="$HOME/.meteor-tarball-tmp"
 
+###########################################
+## This is for downloading the tarball file. 
+## We have already predownloaded
+###########################################
+#
+#TARBALL_URL="https://static-meteor.netdna-ssl.com/packages-bootstrap/${RELEASE}/meteor-bootstrap-${PLATFORM}.tar.gz"
+#
+#cleanUp() {
+#  rm -rf "$TARBALL_FILE"
+#  rm -rf "$INSTALL_TMPDIR"
+#}
+#
+#mkdir "$INSTALL_TMPDIR"
+#
+#VERBOSITY="--progress-bar"
+##VERBOSITY="--silent";
+#
+#while [ $ATTEMPTS -lt $MAX_ATTEMPTS ]
+#do
+#  ATTEMPTS=$((ATTEMPTS + 1))
+#
+#  curl $VERBOSITY --fail --continue-at - \
+#    "$TARBALL_URL" --output "$TARBALL_FILE"
+#
+#  if [ $? -eq 0 ]
+#  then
+#      break
+#  fi
+#
+#  echo "Retrying download in $RETRY_DELAY_SECS seconds..."
+#  sleep $RETRY_DELAY_SECS
+#done
+#
+###########################################
+## END
+###########################################
 
-
-
-
-
-
-
-
-cleanUp() {
-  rm -rf "$TARBALL_FILE"
-  rm -rf "$INSTALL_TMPDIR"
-}
-
-mkdir "$INSTALL_TMPDIR"
-
-VERBOSITY="--progress-bar"
-#VERBOSITY="--silent";
-
-while [ $ATTEMPTS -lt $MAX_ATTEMPTS ]
-do
-  ATTEMPTS=$((ATTEMPTS + 1))
-
-  curl $VERBOSITY --fail --continue-at - \
-    "$TARBALL_URL" --output "$TARBALL_FILE"
-
-  if [ $? -eq 0 ]
-  then
-      break
-  fi
-
-  echo "Retrying download in $RETRY_DELAY_SECS seconds..."
-  sleep $RETRY_DELAY_SECS
-done
 set -e
 
 # bomb out if it didn't work, eg no net
