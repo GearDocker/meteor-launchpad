@@ -13,7 +13,7 @@ fi
 # Fix permissions warning in Meteor >=1.4.2.1 without breaking
 # earlier versions of Meteor with --unsafe-perm or 
 # https://github.com/meteor/meteor/issues/7959
-#export METEOR_ALLOW_SUPERUSER=true
+export METEOR_ALLOW_SUPERUSER=true
 
 cd $APP_SOURCE_DIR
 printf "\n[-] meteor reset ...\n\n"

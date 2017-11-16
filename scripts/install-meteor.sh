@@ -25,8 +25,6 @@ else
   sh /tmp/install_meteor.sh
 fi
 
-
-
 ######################################
 ## Worked on method just to copy the meteor package rather than
 ## risk not downloading, but abandoned it at the end
