@@ -36,29 +36,23 @@ ENV TOOL_NODE_FLAGS $TOOL_NODE_FLAGS
 
 RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/install-deps.sh && \
-  $BUILD_SCRIPTS_DIR/install-node.sh && \
-  $BUILD_SCRIPTS_DIR/install-passenger.sh && \
-  $BUILD_SCRIPTS_DIR/post-install-cleanup.sh
-
-#############################
-# Install Meteror as User Node
-#############################
-#USER node
-RUN cd $APP_SOURCE_DIR && \
-  curl "https://install.meteor.com/?release=1.5" | sh
-#  curl "https://install.meteor.com/?release=1.4.4.4" | sh
-
-RUN chown -R node:node $APP_SOURCE_DIR && chown -R node:node $APP_BUNDLE_DIR
+  $BUILD_SCRIPTS_DIR/install-passenger.sh 
 
 #########################################################
 # ONBUILD 
 #########################################################
+ONBUILD RUN cd $APP_SOURCE_DIR && \
+  $BUILD_SCRIPTS_DIR/install-node.sh && \
+  curl "https://install.meteor.com/?release=1.5" | sh
+#  curl "https://install.meteor.com/?release=1.4.4.4" | sh
+
 ONBUILD COPY . $APP_SOURCE_DIR
 ONBUILD RUN chown -R node:node $APP_SOURCE_DIR && chown -R node:node $APP_BUNDLE_DIR
 ONBUILD USER node
 ONBUILD ENV TOOL_NODE_FLAGS "--max-old-space-size=3033"
 ONBUILD RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/build-meteor.sh
+  $BUILD_SCRIPTS_DIR/build-meteor.sh && \
+  $BUILD_SCRIPTS_DIR/post-install-cleanup.sh
 
 #RUN /bin/bash -c "export TOTAL_MEMORY=`awk '/^(MemTotal)/{print $2}' /proc/meminfo` && \
 #    export MEMORY_ALLOCATION=$(echo \"$TOTAL_MEMORY*0.75\"|bc) && \
