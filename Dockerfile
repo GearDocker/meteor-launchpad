@@ -18,8 +18,8 @@ ENV BUILD_SCRIPTS_DIR /opt/build_scripts
 COPY scripts $BUILD_SCRIPTS_DIR
 RUN chmod -R 750 $BUILD_SCRIPTS_DIR && chown -R node:node $BUILD_SCRIPTS_DIR
 
-RUN mkdir -p $APP_SOURCE_DIR && chown -R node:node $APP_SOURCE_DIR
-RUN mkdir -p $APP_BUNDLE_DIR && chown -R node:node $APP_BUNDLE_DIR
+RUN mkdir -p $APP_SOURCE_DIR 
+RUN mkdir -p $APP_BUNDLE_DIR 
 
 ARG INSTALL_PASSENGER
 ENV INSTALL_PASSENGER ${INSTALL_PASSENGER:-true}
@@ -47,6 +47,8 @@ RUN cd $APP_SOURCE_DIR && \
 RUN cd $APP_SOURCE_DIR && \
   curl "https://install.meteor.com/?release=1.5" | sh
 #  curl "https://install.meteor.com/?release=1.4.4.4" | sh
+
+RUN chown -R node:node $APP_SOURCE_DIR && chown -R node:node $APP_BUNDLE_DIR
 
 #########################################################
 # ONBUILD 
