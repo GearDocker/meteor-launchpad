@@ -34,8 +34,8 @@ ENV NPM_TOKEN $NPM_TOKEN
 ARG TOOL_NODE_FLAGS
 ENV TOOL_NODE_FLAGS $TOOL_NODE_FLAGS
 
-RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/install-passenger.sh 
+#RUN cd $APP_SOURCE_DIR && \
+#  $BUILD_SCRIPTS_DIR/install-passenger.sh 
 
 #RUN cd $APP_SOURCE_DIR && \
 #  $BUILD_SCRIPTS_DIR/install-node.sh && \
@@ -53,10 +53,11 @@ ONBUILD COPY . $APP_SOURCE_DIR
 #ONBUILD USER node
 ONBUILD ENV TOOL_NODE_FLAGS "--max-old-space-size=3033"
 ONBUILD RUN cd $APP_SOURCE_DIR && \
+  $BUILD_SCRIPTS_DIR/install-deps.sh && \
   $BUILD_SCRIPTS_DIR/install-node.sh && \
   $BUILD_SCRIPTS_DIR/install-meteor.sh && \
-  $BUILD_SCRIPTS_DIR/install-deps.sh && \
   $BUILD_SCRIPTS_DIR/build-meteor.sh && \
+  $BUILD_SCRIPTS_DIR/install-passenger.sh && \
   $BUILD_SCRIPTS_DIR/post-install-cleanup.sh && \
   $BUILD_SCRIPTS_DIR/post-build-cleanup.sh && \
   echo "Changing ownership to node for $APP_SOURCE_DIR and $APP_BUNDLE_DIR" && \
