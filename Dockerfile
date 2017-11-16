@@ -38,17 +38,16 @@ RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/install-deps.sh && \
   $BUILD_SCRIPTS_DIR/install-passenger.sh 
 
-RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/install-node.sh && \
-  curl "https://install.meteor.com/?release=1.5" | sh
+#RUN cd $APP_SOURCE_DIR && \
+#  $BUILD_SCRIPTS_DIR/install-node.sh && \
+#  curl "https://install.meteor.com/?release=1.5" | sh
 
 #########################################################
 # ONBUILD 
 #########################################################
-#ONBUILD RUN cd $APP_SOURCE_DIR && \
-#  $BUILD_SCRIPTS_DIR/install-node.sh && \
-#  curl "https://install.meteor.com/?release=1.5" | sh
-#  curl "https://install.meteor.com/?release=1.4.4.4" | sh
+ONBUILD RUN cd $APP_SOURCE_DIR && \
+  $BUILD_SCRIPTS_DIR/install-node.sh && \
+  $BUILD_SCRIPTS_DIR/install-meteor.sh
 
 ONBUILD COPY . $APP_SOURCE_DIR
 ONBUILD RUN chown -R node:node $APP_SOURCE_DIR && chown -R node:node $APP_BUNDLE_DIR
