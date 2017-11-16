@@ -53,7 +53,7 @@ ONBUILD RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/post-install-cleanup.sh && \
   $BUILD_SCRIPTS_DIR/post-build-cleanup.sh && \
   echo "Changing ownership to node for $APP_SOURCE_DIR and $APP_BUNDLE_DIR" && \
-  chown -R node:node $APP_SOURCE_DIR && chown -R node:node $APP_BUNDLE_DIR
+  chown -R node:node $APP_BUNDLE_DIR
 
 ## start the app
 #WORKDIR $APP_BUNDLE_DIR/bundle
