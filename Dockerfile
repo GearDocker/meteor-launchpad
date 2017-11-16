@@ -46,7 +46,8 @@ RUN cd $APP_SOURCE_DIR && \
 #########################################################
 ONBUILD RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/install-node.sh && \
-  $BUILD_SCRIPTS_DIR/install-meteor.sh
+  curl "https://install.meteor.com/?release=1.5" | sh
+  #$BUILD_SCRIPTS_DIR/install-meteor.sh
 
 ONBUILD COPY . $APP_SOURCE_DIR
 
