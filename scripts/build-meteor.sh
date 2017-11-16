@@ -11,30 +11,30 @@ if [[ "$NPM_TOKEN" ]]; then
 fi
 
 # Fix permissions warning in Meteor >=1.4.2.1 without breaking
-# earlier versions of Meteor with --unsafe-perm or --allow-superuser
+# earlier versions of Meteor with --unsafe-perm or 
 # https://github.com/meteor/meteor/issues/7959
-export METEOR_ALLOW_SUPERUSER=true
+#export METEOR_ALLOW_SUPERUSER=true
 
 cd $APP_SOURCE_DIR
-printf "\n[-] meteor reset --allow-superuser ...\n\n"
+printf "\n[-] meteor reset ...\n\n"
 
 # Install app deps
-VERSION=`meteor --version --allow-superuser`
+VERSION=`meteor --version`
 printf "\n[-] Meteror version is $VERSION \n\n"
 
 # Install app deps
-printf "\n[-] Running npm install --allow-superuser in app directory at $APP_BUNDLE_DIR ...\n\n"
-meteor npm install --allow-superuser
+printf "\n[-] Running npm install in app directory at $APP_BUNDLE_DIR ...\n\n"
+meteor npm install 
 
 # build the bundle
-printf "\n[-] meteor build --directory $APP_BUNDLE_DIR --server-only --allow-superuser @$APP_BUNDLE_DIR ...\n\n"
+printf "\n[-] meteor build --directory $APP_BUNDLE_DIR --server-only @$APP_BUNDLE_DIR ...\n\n"
 mkdir -p $APP_BUNDLE_DIR
-meteor build --directory $APP_BUNDLE_DIR --server-only --allow-superuser
+meteor build --directory $APP_BUNDLE_DIR --server-only 
 
 # run npm install in bundle
-printf "\n[-] Running npm install --allow-superuser in the server bundle at $APP_BUNDLE_DIR/bundle/programs/server/ ...\n\n"
+printf "\n[-] Running npm install in the server bundle at $APP_BUNDLE_DIR/bundle/programs/server/ ...\n\n"
 cd $APP_BUNDLE_DIR/bundle/programs/server/
-meteor npm install --production --allow-superuser
+meteor npm install --production 
 
 #Create public and tmp directory 
 #needed for container runners like passenger

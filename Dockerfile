@@ -25,8 +25,7 @@ ARG INSTALL_PASSENGER
 ENV INSTALL_PASSENGER ${INSTALL_PASSENGER:-true}
 
 ARG NODE_VERSION
-#ENV NODE_VERSION ${NODE_VERSION:-4.8.6}
-ENV NODE_VERSION ${NODE_VERSION:-5.12.0}
+ENV NODE_VERSION ${NODE_VERSION:-4.8.6}
 
 ARG NPM_TOKEN
 ENV NPM_TOKEN $NPM_TOKEN
@@ -44,6 +43,10 @@ RUN cd $APP_SOURCE_DIR && \
 RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/install-passenger.sh
 
+#############################
+# Install Meteror as User Node
+#############################
+USER node
 RUN cd $APP_SOURCE_DIR && \
   curl "https://install.meteor.com/?release=1.5.2" | sh
 #  curl "https://install.meteor.com/?release=1.4.4.4" | sh
