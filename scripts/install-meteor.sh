@@ -6,6 +6,7 @@ if [ "$DEV_BUILD" = true ]; then
   # so just install the latest version of Meteor
   printf "\n[-] Installing the latest version of Meteor...\n\n"
   curl -v https://install.meteor.com/ | sh
+  #curl -v https://install.meteor.com/?release=1.5 | sh
 else
   # download installer script
   curl -v https://install.meteor.com -o /tmp/install_meteor.sh
