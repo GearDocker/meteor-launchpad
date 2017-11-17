@@ -45,9 +45,15 @@ ONBUILD RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/install-deps.sh && \
   $BUILD_SCRIPTS_DIR/install-node.sh && \
   $BUILD_SCRIPTS_DIR/install-meteor.sh && \
-  $BUILD_SCRIPTS_DIR/build-meteor.sh && \
-  echo "Changing ownership to node for $APP_SOURCE_DIR and $APP_BUNDLE_DIR" && \
-  chown -R node:node $APP_BUNDLE_DIR
+  ls -al $BUILD_SCRIPTS_DIR && \
+  ls -al $BUILD_SCRIPTS_DIR/meteorbuild-mem && \
+  export MAX_MEMORY=`python $BUILD_SCRIPTS_DIR/meteorbuild-mem` && \
+  export TOOL_NODE_FLAGS="$TOOL_NODE_FLAGS --max-old-space-size=$MAX_MEMORY" && \
+  echo "TOOL_NODE_FLAGS=$TOOL_NODE_FLAGS"
+
+  #$BUILD_SCRIPTS_DIR/build-meteor.sh && \
+  #echo "Changing ownership to node for $APP_SOURCE_DIR and $APP_BUNDLE_DIR" && \
+  #chown -R node:node $APP_BUNDLE_DIR
 
 #  $BUILD_SCRIPTS_DIR/post-install-cleanup.sh && \
 #  $BUILD_SCRIPTS_DIR/post-build-cleanup.sh && \
