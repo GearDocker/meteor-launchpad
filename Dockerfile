@@ -42,14 +42,15 @@ ONBUILD RUN cd $APP_SOURCE_DIR && \
   ls -al $BUILD_SCRIPTS_DIR && \
   ls -al $BUILD_SCRIPTS_DIR/meteorbuild-mem && \
   $BUILD_SCRIPTS_DIR/meteorbuild-mem
-ONBUILD RUN cd $APP_SOURCE_DIR && \
-  ls -al $BUILD_SCRIPTS_DIR/max_allowed_mem && \
-  $BUILD_SCRIPTS_DIR/max_allowed_mem && \
-  echo "\n\nMAX_MEMORY=$MAX_MEMORY\n\n" && \
-  export TOOL_NODE_FLAGS="$TOOL_NODE_FLAGS --max-old-space-size=$MAX_MEMORY" && \
-  echo "\nUsing TOOL_NODE_FLAGS=$TOOL_NODE_FLAGS ...\n"
 
-#  export MAX_MEMORY=`$BUILD_SCRIPTS_DIR/max_allowed_mem` && \
+#ONBUILD RUN cd $APP_SOURCE_DIR && \
+#  ls -al $BUILD_SCRIPTS_DIR/meteorbuild-mem && \
+#  $BUILD_SCRIPTS_DIR/meteorbuild-mem && \
+#  echo "\n\nMAX_MEMORY=$MAX_MEMORY\n\n" && \
+#  export TOOL_NODE_FLAGS="$TOOL_NODE_FLAGS --max-old-space-size=$MAX_MEMORY" && \
+#  echo "\nUsing TOOL_NODE_FLAGS=$TOOL_NODE_FLAGS ...\n"
+#
+#  export MAX_MEMORY=`$BUILD_SCRIPTS_DIR/meteorbuild-mem` && \
 #  $BUILD_SCRIPTS_DIR/install-deps.sh && \
 #  $BUILD_SCRIPTS_DIR/install-node.sh && \
 #  $BUILD_SCRIPTS_DIR/install-meteor.sh && \
