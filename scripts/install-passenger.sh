@@ -2,9 +2,9 @@
 
 set -e
 
-if [ -f $APP_SOURCE_DIR/launchpad.conf ]; then
-  source <(grep INSTALL_PASSENGER $APP_SOURCE_DIR/launchpad.conf)
-fi
+#if [ -f $APP_SOURCE_DIR/launchpad.conf ]; then
+#  source <(grep INSTALL_PASSENGER $APP_SOURCE_DIR/launchpad.conf)
+#fi
 
 if [ "$INSTALL_PASSENGER" = true ]; then
   printf "\n[-] Installing phusion passenger ...\n\n"
