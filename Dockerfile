@@ -40,13 +40,11 @@ ONBUILD ENV TOOL_NODE_FLAGS $TOOL_NODE_FLAGS
 
 ONBUILD ENV NPM_TOKEN $NPM_TOKEN
 ONBUILD ENV NODE_VERSION ${NODE_VERSION:-4.8.4}
-ONBUILD ENV TOOL_NODE_FLAGS "--max-old-space-size=3033"
+
 ONBUILD RUN cd $APP_SOURCE_DIR && \
   $BUILD_SCRIPTS_DIR/install-deps.sh && \
   $BUILD_SCRIPTS_DIR/install-node.sh && \
   $BUILD_SCRIPTS_DIR/install-meteor.sh && \
-  ls -al $BUILD_SCRIPTS_DIR && \
-  ls -al $BUILD_SCRIPTS_DIR/meteorbuild-mem && \
   export MAX_MEMORY=`python $BUILD_SCRIPTS_DIR/meteorbuild-mem` && \
   export TOOL_NODE_FLAGS="$TOOL_NODE_FLAGS --max-old-space-size=$MAX_MEMORY" && \
   echo "TOOL_NODE_FLAGS=$TOOL_NODE_FLAGS"
