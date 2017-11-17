@@ -50,9 +50,9 @@ ONBUILD RUN cd $APP_SOURCE_DIR && \
   echo "TOOL_NODE_FLAGS=$TOOL_NODE_FLAGS" && \
   $BUILD_SCRIPTS_DIR/build-meteor.sh && \
   echo "Changing ownership to node for $APP_SOURCE_DIR and $APP_BUNDLE_DIR" && \
-  chown -R node:node $APP_BUNDLE_DIR
+  chown -R node:node $APP_BUNDLE_DIR && \
   $BUILD_SCRIPTS_DIR/post-install-cleanup.sh && \
-  $BUILD_SCRIPTS_DIR/post-build-cleanup.sh && \
+  $BUILD_SCRIPTS_DIR/post-build-cleanup.sh 
 
 ## start the app
 #WORKDIR $APP_BUNDLE_DIR/bundle
