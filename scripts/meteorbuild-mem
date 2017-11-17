@@ -1,15 +1,17 @@
-#!/usr/bin/python
-
-with open('/proc/meminfo', 'rt') as f:
-        vals = {}
-        for i in f.read().splitlines():
-            try:
-                name, val = i.split(':')
-                vals[name.strip()] = int(val.split()[0])
-            except:
-                pass
-
-memfree = vals['MemFree'] + vals['Buffers'] + vals['Cached']
-total_free = vals["MemTotal"]
-allowed_memory = int(total_free*0.75)
-print allowed_memory
+#!/bin/bash
+echo 'hello'
+##!/usr/bin/python
+#
+#with open('/proc/meminfo', 'rt') as f:
+#        vals = {}
+#        for i in f.read().splitlines():
+#            try:
+#                name, val = i.split(':')
+#                vals[name.strip()] = int(val.split()[0])
+#            except:
+#                pass
+#
+#memfree = vals['MemFree'] + vals['Buffers'] + vals['Cached']
+#total_free = vals["MemTotal"]
+#allowed_memory = int(total_free*0.75)
+#print allowed_memory
