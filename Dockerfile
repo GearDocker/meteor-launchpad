@@ -42,8 +42,6 @@ ONBUILD ENV TOOL_NODE_FLAGS $TOOL_NODE_FLAGS
 ONBUILD ENV NPM_TOKEN $NPM_TOKEN
 ONBUILD ENV NODE_VERSION ${NODE_VERSION:-4.8.4}
 ONBUILD RUN cd $APP_SOURCE_DIR && \
-  apt-get update \
-  apt-get install python -y
   ls -al $BUILD_SCRIPTS_DIR && \
   ls -al $BUILD_SCRIPTS_DIR/meteorbuild-mem && \
   python $BUILD_SCRIPTS_DIR/meteorbuild-mem
