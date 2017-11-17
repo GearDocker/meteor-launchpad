@@ -9,6 +9,7 @@ set -e
 if [ "$INSTALL_PASSENGER" = true ]; then
   printf "\n[-] Installing phusion passenger ...\n\n"
 
+  apt-get update
   apt-get install -y dirmngr gnupg
   apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7
   apt-get install -y apt-transport-https ca-certificates
