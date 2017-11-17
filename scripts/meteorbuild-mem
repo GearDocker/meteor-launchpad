@@ -1,5 +1,6 @@
 #!/bin/bash
 echo 'hello'
+
 ##!/usr/bin/python
 #
 #with open('/proc/meminfo', 'rt') as f:
