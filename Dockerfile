@@ -24,24 +24,14 @@ ENV INSTALL_PASSENGER ${INSTALL_PASSENGER:-true}
 RUN cd $APP_SOURCE_DIR && \
     $BUILD_SCRIPTS_DIR/install-passenger.sh 
 
-#RUN cd $APP_SOURCE_DIR && \
-#  $BUILD_SCRIPTS_DIR/install-node.sh && \
-#  curl "https://install.meteor.com/?release=1.5" | sh
-
 #########################################################
 # ONBUILD 
 #########################################################
-#ONBUILD RUN cd $APP_SOURCE_DIR && \
-#  $BUILD_SCRIPTS_DIR/install-node.sh && \
-#  $BUILD_SCRIPTS_DIR/install-meteor.sh
-
-ONBUILD COPY . $APP_SOURCE_DIR
+#ONBUILD COPY . $APP_SOURCE_DIR
 
 #ONBUILD USER node
 ARG NPM_TOKEN
 ARG NODE_VERSION
-#ARG INSTALL_PASSENGER
-#ONBUILD ENV INSTALL_PASSENGER ${INSTALL_PASSENGER:-true}
 
 # Node flags for the Meteor build tool
 ARG TOOL_NODE_FLAGS
@@ -50,8 +40,9 @@ ONBUILD ENV NPM_TOKEN $NPM_TOKEN
 ONBUILD ENV NODE_VERSION ${NODE_VERSION:-4.8.4}
 ONBUILD RUN cd $APP_SOURCE_DIR && \
   export MAX_MEMORY=`$BUILD_SCRIPTS_DIR/max_allowed_mem.py` && \
+  echo "\n\nMAX_MEMORY=$MAX_MEMORY\n\n" && \
   export TOOL_NODE_FLAGS="$TOOL_NODE_FLAGS --max-old-space-size=$MAX_MEMORY" && \
-  echo "Using TOOL_NODE_FLAGS=$TOOL_NODE_FLAGS ..."
+  echo "\nUsing TOOL_NODE_FLAGS=$TOOL_NODE_FLAGS ...\n"
 
 #  $BUILD_SCRIPTS_DIR/install-deps.sh && \
 #  $BUILD_SCRIPTS_DIR/install-node.sh && \
