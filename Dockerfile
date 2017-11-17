@@ -18,12 +18,11 @@ RUN chmod -R 750 $BUILD_SCRIPTS_DIR && chown -R node:node $BUILD_SCRIPTS_DIR
 RUN mkdir -p $APP_SOURCE_DIR 
 RUN mkdir -p $APP_BUNDLE_DIR 
 
-# Node flags for the Meteor build tool
-ARG TOOL_NODE_FLAGS
-ENV TOOL_NODE_FLAGS $TOOL_NODE_FLAGS
+ARG INSTALL_PASSENGER
+ENV INSTALL_PASSENGER ${INSTALL_PASSENGER:-true}
 
-#RUN cd $APP_SOURCE_DIR && \
-#  $BUILD_SCRIPTS_DIR/install-passenger.sh 
+RUN cd $APP_SOURCE_DIR && \
+    $BUILD_SCRIPTS_DIR/install-passenger.sh 
 
 #RUN cd $APP_SOURCE_DIR && \
 #  $BUILD_SCRIPTS_DIR/install-node.sh && \
@@ -41,21 +40,32 @@ ONBUILD COPY . $APP_SOURCE_DIR
 #ONBUILD USER node
 ARG NPM_TOKEN
 ARG NODE_VERSION
-ARG INSTALL_PASSENGER
-ONBUILD ENV INSTALL_PASSENGER ${INSTALL_PASSENGER:-true}
+#ARG INSTALL_PASSENGER
+#ONBUILD ENV INSTALL_PASSENGER ${INSTALL_PASSENGER:-true}
+
+# Node flags for the Meteor build tool
+ARG TOOL_NODE_FLAGS
+ONBUILD ENV TOOL_NODE_FLAGS $TOOL_NODE_FLAGS
 ONBUILD ENV NPM_TOKEN $NPM_TOKEN
 ONBUILD ENV NODE_VERSION ${NODE_VERSION:-4.8.4}
-ONBUILD ENV TOOL_NODE_FLAGS "--max-old-space-size=3033"
 ONBUILD RUN cd $APP_SOURCE_DIR && \
-  $BUILD_SCRIPTS_DIR/install-deps.sh && \
-  $BUILD_SCRIPTS_DIR/install-node.sh && \
-  $BUILD_SCRIPTS_DIR/install-meteor.sh && \
-  $BUILD_SCRIPTS_DIR/build-meteor.sh && \
-  $BUILD_SCRIPTS_DIR/install-passenger.sh && \
-  $BUILD_SCRIPTS_DIR/post-install-cleanup.sh && \
-  $BUILD_SCRIPTS_DIR/post-build-cleanup.sh && \
-  echo "Changing ownership to node for $APP_SOURCE_DIR and $APP_BUNDLE_DIR" && \
-  chown -R node:node $APP_BUNDLE_DIR
+  export MAX_MEMORY=`$BUILD_SCRIPTS_DIR/max_allowed_mem.py` && \
+  export TOOL_NODE_FLAGS="$TOOL_NODE_FLAGS --max-old-space-size=$MAX_MEMORY" && \
+  echo "Using TOOL_NODE_FLAGS=$TOOL_NODE_FLAGS ..."
+
+#  $BUILD_SCRIPTS_DIR/install-deps.sh && \
+#  $BUILD_SCRIPTS_DIR/install-node.sh && \
+#  $BUILD_SCRIPTS_DIR/install-meteor.sh && \
+#  $BUILD_SCRIPTS_DIR/build-meteor.sh && \
+#  $BUILD_SCRIPTS_DIR/post-install-cleanup.sh && \
+#  $BUILD_SCRIPTS_DIR/post-build-cleanup.sh && \
+#  echo "Changing ownership to node for $APP_SOURCE_DIR and $APP_BUNDLE_DIR" && \
+#  chown -R node:node $APP_BUNDLE_DIR
+
+
+
+
+#  $BUILD_SCRIPTS_DIR/install-passenger.sh && \
 
 ## start the app
 #WORKDIR $APP_BUNDLE_DIR/bundle
