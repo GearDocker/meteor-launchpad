@@ -18,11 +18,11 @@ RUN chmod -R 750 $BUILD_SCRIPTS_DIR && chown -R node:node $BUILD_SCRIPTS_DIR
 RUN mkdir -p $APP_SOURCE_DIR 
 RUN mkdir -p $APP_BUNDLE_DIR 
 
-ARG INSTALL_PASSENGER
-ENV INSTALL_PASSENGER ${INSTALL_PASSENGER:-true}
-
-RUN cd $APP_SOURCE_DIR && \
-    $BUILD_SCRIPTS_DIR/install-passenger.sh 
+#ARG INSTALL_PASSENGER
+#ENV INSTALL_PASSENGER ${INSTALL_PASSENGER:-true}
+#
+#RUN cd $APP_SOURCE_DIR && \
+#    $BUILD_SCRIPTS_DIR/install-passenger.sh 
 
 #########################################################
 # ONBUILD 
@@ -40,11 +40,12 @@ ONBUILD ENV NPM_TOKEN $NPM_TOKEN
 ONBUILD ENV NODE_VERSION ${NODE_VERSION:-4.8.4}
 ONBUILD RUN cd $APP_SOURCE_DIR && \
   ls -al $BUILD_SCRIPTS_DIR/max_allowed_mem.py && \
-  export MAX_MEMORY=`$BUILD_SCRIPTS_DIR/max_allowed_mem.py` && \
+  BUILD_SCRIPTS_DIR/max_allowed_mem.py && \
   echo "\n\nMAX_MEMORY=$MAX_MEMORY\n\n" && \
   export TOOL_NODE_FLAGS="$TOOL_NODE_FLAGS --max-old-space-size=$MAX_MEMORY" && \
   echo "\nUsing TOOL_NODE_FLAGS=$TOOL_NODE_FLAGS ...\n"
 
+#  export MAX_MEMORY=`$BUILD_SCRIPTS_DIR/max_allowed_mem.py` && \
 #  $BUILD_SCRIPTS_DIR/install-deps.sh && \
 #  $BUILD_SCRIPTS_DIR/install-node.sh && \
 #  $BUILD_SCRIPTS_DIR/install-meteor.sh && \
