@@ -20,4 +20,5 @@ if [ "$INSTALL_PASSENGER" = true ]; then
     
   # Install Passenger + Nginx
   apt-get install -y nginx-extras passenger
+
 fi
