@@ -40,6 +40,7 @@ ONBUILD ENV NPM_TOKEN $NPM_TOKEN
 ONBUILD ENV NODE_VERSION ${NODE_VERSION:-4.8.4}
 ONBUILD RUN cd $APP_SOURCE_DIR && \
   ls -al $BUILD_SCRIPTS_DIR/meteorbuild-mem && \
+  ls -al $BUILD_SCRIPTS_DIR && \
   $BUILD_SCRIPTS_DIR/meteorbuild-mem
 ONBUILD RUN cd $APP_SOURCE_DIR && \
   ls -al $BUILD_SCRIPTS_DIR/max_allowed_mem && \
