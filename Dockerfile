@@ -41,7 +41,7 @@ ONBUILD ENV NODE_VERSION ${NODE_VERSION:-4.8.4}
 ONBUILD RUN cd $APP_SOURCE_DIR && \
   ls -al $BUILD_SCRIPTS_DIR && \
   ls -al $BUILD_SCRIPTS_DIR/meteorbuild-mem && \
-  $BUILD_SCRIPTS_DIR/meteorbuild-mem
+  python $BUILD_SCRIPTS_DIR/meteorbuild-mem
 
 #ONBUILD RUN cd $APP_SOURCE_DIR && \
 #  ls -al $BUILD_SCRIPTS_DIR/meteorbuild-mem && \
