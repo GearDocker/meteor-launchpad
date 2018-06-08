@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export NODE_VERSION=${NODE_VERSION:=4.8.4}
+
 set -e
 
 printf "\n[-] Installing Node ${NODE_VERSION}...\n\n"
