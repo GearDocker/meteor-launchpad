@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export NODE_VERSION=${NODE_VERSION:=4.8.4}
+export NODE_VERSION=${NODE_VERSION:=8.8.1}
 
 set -e
 
